@@ -50,11 +50,19 @@ togglePersonsHandler = () => {
       cursor: 'pointer'
     };
 
-    let persons = false;
+    let persons = null;
 
     if (this.state.showPersons){
       persons = (
         <div>
+          {this.state.persons.map((person) => {
+            return <Person 
+            name={person.name} 
+            age={person.age} 
+            />
+          })}
+        </div>
+        /* <div>
           <Person 
             name={this.state.persons[0].name} 
             age={this.state.persons[0].age}>My Hobbies: Coding
@@ -72,7 +80,7 @@ togglePersonsHandler = () => {
             name={this.state.persons[2].name} 
             age={this.state.persons[2].age}>My Hobbies: Coding
           </Person>
-      </div>
+      </div> */
       )
     }
 
