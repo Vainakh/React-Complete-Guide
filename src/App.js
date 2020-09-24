@@ -10,7 +10,8 @@ class App extends React.Component {
       { name: "Jay", age: 33 },
       { name: "David", age: 30},
     ],
-    otherState: "some other value"
+    otherState: "some other value",
+    showPersons: false
   };
   
 
@@ -34,6 +35,11 @@ nameChangeHandler = (event) => {
   })
 };
 
+togglePersonsHandler = () => {
+  const doesShow = this.state.showPersons;
+  this.setState({showPersons: !doesShow});
+};
+
   render () {
 
     const style = {
@@ -50,23 +56,30 @@ nameChangeHandler = (event) => {
         <p>This is really working!</p>
         <button 
           style={style}
-          onClick={() => this.switchNameHandler("Magnificent Fiasco")}>Switch Name
+          onClick={this.togglePersonsHandler}>Switch Name
         </button>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age}>My Hobbies: Coding
-        </Person>
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, "MagnificentFiasco")}
-          changed={this.nameChangeHandler}>My Hobbies: Being beautiful and having babies with Adlan!
-          
-        </Person>
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age}>My Hobbies: Coding</Person>
-      </div> 
+
+        { this.state.showPersons ?
+          <div>
+            <Person 
+              name={this.state.persons[0].name} 
+              age={this.state.persons[0].age}>My Hobbies: Coding
+            </Person>
+
+            <Person 
+              name={this.state.persons[1].name} 
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, "MagnificentFiasco")}
+              changed={this.nameChangeHandler}>My Hobbies: Being beautiful and having babies with Adlan!
+              
+            </Person>
+            <Person 
+              name={this.state.persons[2].name} 
+              age={this.state.persons[2].age}>My Hobbies: Coding
+            </Person>
+          </div> : null 
+        }
+        </div> 
     );
   }
 }
