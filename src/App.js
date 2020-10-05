@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
+// import Radium, {StyleRoot} from 'radium';
 import './App.css';
-
+import styled from 'styled-components';
 import Person from './Person/Person';
+
+
+const StyledButton = styled.button`
+  background-color: green;
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lightgreen;
+    color: black;
+  }
+`;
 
 class App extends React.Component {
   state = {
@@ -16,29 +31,18 @@ class App extends React.Component {
   };
   
   deletePersonHandler = (personIndex) => {
-    // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
 
   };
 
-// switchNameHandler = (newName) => {
-//   this.setState({
-//     persons: [
-//       { name: newName, age: 43 },
-//       { name: "Jay", age: 33 },
-//       { name: "David", age: 30 },
-//     ]
-//   })
-// };
-
 nameChangeHandler = (event, id) => {
 
   const personIndex = this.state.persons.findIndex((person) => {
     return person.id === id;
   });
-  //const person = Object.assign({}, this.state.persons[personIndex]);
+  
   const person = {...this.state.persons[personIndex]};
 
   person.name = event.target.value;
@@ -85,31 +89,14 @@ togglePersonsHandler = () => {
             />
           })}
         </div>
-        /* <div>
-          <Person 
-            name={this.state.persons[0].name} 
-            age={this.state.persons[0].age}>My Hobbies: Coding
-          </Person>
-
-          <Person 
-            name={this.state.persons[1].name} 
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, "MagnificentFiasco")}
-            changed={this.nameChangeHandler}>My Hobbies: Being beautiful and having babies with Adlan!
-            
-          </Person>
-
-          <Person 
-            name={this.state.persons[2].name} 
-            age={this.state.persons[2].age}>My Hobbies: Coding
-          </Person>
-      </div> */
       );
-      style.backgroundColor = "red";
-      style[":hover"] = {
-        backgroundColor: "salmon",
-        color: "black"
-      }
+
+
+      // style.backgroundColor = "red";
+      // style[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "black"
+      // }
     }
 
     const classes = [];
@@ -123,39 +110,21 @@ togglePersonsHandler = () => {
     }
 
     return (
-      <div className="App">
-        <h1>Hello World!</h1>
-        <p className={classes.join(" ")}>This is really working!</p>
-        <button 
-          style={style}
-          onClick={this.togglePersonsHandler}>Toggle Persons
-        </button>
-        {persons}
-      </div>   
+       <div>
+        <div className="App">
+          <h1>Hello World!</h1>
+          <p className={classes.join(" ")}>This is really working!</p>
+          <StyledButton 
+            // style={style}
+            onClick={this.togglePersonsHandler}>Toggle Persons
+          </StyledButton>
+          {persons}
+        </div> 
+       </div>  
     );
   }
 }
 
 
-export default Radium(App);
+export default App;
 
-// state = {
-//   persons: [
-//     { name: "Adlan", age: 43 },
-//     { name: "Jay", age: 33 },
-//     { name: "David", age: 30},
-//   ],
-//   otherState: "Some other value"
-// }
-
-// switchNameHandler = () => {
-//   // console.log("Switch!")
-//   //Dont do this => this.state.persons[0].name = "Magnificent Fiasco"
-//   this.setState({
-//     persons: [
-//       { name: "Magnificent Fiasco", age: 43 },
-//       { name: "Jay", age: 33 },
-//       { name: "David", age: 30 },
-//     ]
-//   })
-// };
