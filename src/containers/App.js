@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
 // import Radium, {StyleRoot} from 'radium';
 import './App.css';
-import styled from 'styled-components';
+import styled, { ThemeConsumer } from 'styled-components';
 import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
 
 
-const StyledButton = styled.button`
-  background-color: ${(props) => props.alt ? 'red' : 'green'};
-  color: white;
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointer;
+// const StyledButton = styled.button`
+//   background-color: ${(props) => props.alt ? 'red' : 'green'};
+//   color: white;
+//   font: inherit;
+//   border: 1px solid blue;
+//   padding: 8px;
+//   cursor: pointer;
 
-  &:hover {
-    background-color: ${(props) => props.alt ? 'salmon' : 'lightgreen'};
-    color: black;
-  }
-`;
+//   &:hover {
+//     background-color: ${(props) => props.alt ? 'salmon' : 'lightgreen'};
+//     color: black;
+//   }
+// `;
 
 class App extends React.Component {
   state = {
     persons: [
       { id: "1", name: "Adlan", age: 43 },
-      { id: "2", name: "Jay", age: 33 },
-      { id: "3", name: "David", age: 30},
+      { id: "2", name: "Ellie", age: 33 },
+      { id: "3", name: "Frank", age: 30},
     ],
     otherState: "some other value",
     showPersons: false
@@ -79,7 +80,12 @@ togglePersonsHandler = () => {
     if (this.state.showPersons){
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
+          <Persons
+            persons={this.state.persons}
+            click={this.deletePersonHandler}
+            changed={this.nameChangeHandler}
+          />
+          {/* {this.state.persons.map((person, index) => {
             return <Person
             click={() => this.deletePersonHandler(index)} 
             name={person.name} 
@@ -87,7 +93,7 @@ togglePersonsHandler = () => {
             key={person.id} 
             changed={(event) => this.nameChangeHandler(event, person.id)}
             />
-          })}
+          })} */}
         </div>
       );
 
@@ -114,11 +120,11 @@ togglePersonsHandler = () => {
         <div className="App">
           <h1>Hello World!</h1>
           <p className={classes.join(" ")}>This is really working!</p>
-          <StyledButton 
+          <button 
             // style={style}
-            alt={this.state.showPersons}
+            className="button"
             onClick={this.togglePersonsHandler}>Toggle Persons
-          </StyledButton>
+          </button>
           {persons}
         </div> 
        </div>  
