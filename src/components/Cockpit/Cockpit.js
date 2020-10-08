@@ -4,7 +4,22 @@ import classes from './Cockpit.css';
 const Cockpit = (props) => {
 
   useEffect(() => {
-    console.log("[Cockpit.js] useEffect")
+    console.log("[Cockpit.js] useEffect");
+
+
+    setTimeout(() =>{
+      alert("saved data to cloud!");
+    }, 1000);
+    return (() => {
+      console.log("[Cockpit.js] cleanup work in useEffect")
+    })
+  }, []);
+
+  useEffect(() => {
+    console.log("[Cockpit.js] 2 useEffect");
+    return (() => {
+      console.log("[Cockpit.js] cleanup work in 2 useEffect")
+    })
   })
 
   let btnClass = classes.Green;
@@ -16,11 +31,11 @@ const Cockpit = (props) => {
 
   const assignedClasses = [];
 
-    if (props.persons.length <= 2) {
+    if (props.personsLength <= 2) {
       assignedClasses.push(classes.red);
     }
 
-    if (props.persons.length <= 1) {
+    if (props.personsLength <= 1) {
       assignedClasses.push(classes.bold);
     }
 
@@ -34,8 +49,7 @@ const Cockpit = (props) => {
         onClick={props.clicked}>Toggle Persons
       </button>
     </div>
-    
   );
 };
 
-export default Cockpit;
+export default React.memo(Cockpit);
