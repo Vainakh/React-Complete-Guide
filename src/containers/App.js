@@ -5,6 +5,7 @@ import styled, { ThemeConsumer } from 'styled-components';
 import Person from '../components/Persons/Person/Person';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
 
 class App extends React.Component {
   constructor(props){
@@ -87,21 +88,21 @@ togglePersonsHandler = () => {
     }
 
     return (
-        <div className={classes.App}>
-        <button onClick={() => {this.setState({showCockpit: false})
-        }}
+        <WithClass classes={classes.App}>
+          <button onClick={() => {this.setState({showCockpit: false})
+          }}
 
-        >Remove Cockpit</button>
-          { this.state.showCockpit ? <Cockpit
-          title={this.props.appTitle}
-          subtitle={this.props.appSubTitle}
-          clicked={this.togglePersonsHandler}
-          showPersons={this.state.showPersons}
-          personsLength={this.state.persons.length}  />
-          : null}
-         
-          {persons}
-        </div>  
+          >Remove Cockpit</button>
+            { this.state.showCockpit ? <Cockpit
+            title={this.props.appTitle}
+            subtitle={this.props.appSubTitle}
+            clicked={this.togglePersonsHandler}
+            showPersons={this.state.showPersons}
+            personsLength={this.state.persons.length}  />
+            : null}
+          
+            {persons}
+        </WithClass>  
     );
   }
 }
