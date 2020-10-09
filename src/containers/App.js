@@ -7,6 +7,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import withClass from '../hoc/withClass';
 import Aux from '../hoc/Aux';
+import AuthContext from '../context/auth-context';
 
 class App extends React.Component {
   constructor(props){
@@ -23,7 +24,8 @@ class App extends React.Component {
     otherState: "some other value",
     showPersons: false,
     showCockpit: true,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -78,12 +80,17 @@ togglePersonsHandler = () => {
   this.setState({showPersons: !doesShow});
 };
 
+loginHandler = () => {
+  this.setState({authenticated: true})
+};
+
   render () {
     console.log("[App.js] render")
     let persons = null;
     
     if (this.state.showPersons){
       persons =  <Persons
+            isAuthenticated={this.state.authenticated}
             persons={this.state.persons}
             click={this.deletePersonHandler}
             changed={this.nameChangeHandler}
@@ -97,7 +104,12 @@ togglePersonsHandler = () => {
           }}
 
           >Remove Cockpit</button>
-            { this.state.showCockpit ? <Cockpit
+
+          <AuthContext.Provider
+            value={{authenticated: this.state.authenticated, login: this.loginHandler}}
+          >
+          { this.state.showCockpit ? <Cockpit
+            login={this.loginHandler}
             title={this.props.appTitle}
             subtitle={this.props.appSubTitle}
             clicked={this.togglePersonsHandler}
@@ -106,6 +118,10 @@ togglePersonsHandler = () => {
             : null}
           
             {persons}
+          </AuthContext.Provider>
+            
+
+            <button onClick={this.loginHandler}>LogIn</button>
         </Aux>  
     );
   }

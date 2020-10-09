@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import Person from './Person/Person';
 
+
 class Persons extends PureComponent {
 
   // static getDerivedStateFromProps(props, state){
@@ -45,6 +46,7 @@ class Persons extends PureComponent {
  
   return (
     <Person
+    isAuth = {this.props.isAuthenticated}
     click={() => this.props.click(index)} 
     name={person.name} 
     age={person.age}
