@@ -4,7 +4,8 @@ import React, {Component} from 'react';
 // import './Person.css';
 import Aux from '../../../hoc/Aux';
 import withClass from '../../../hoc/withClass';
-import classes from './Person.css'
+import PropTypes from 'prop-types';
+import classes from './Person.css';
 
 
 // const StyledDiv = styled.div`
@@ -28,13 +29,22 @@ class Person extends Component {
         <div className={classes.Person}>
         <p onClick={this.props.click}>I am {this.props.name} and I am {this.props.age} years old!!</p>
         <p>{this.props.children}</p>
-        <input type="text" value={this.props.name} onChange={this.props.changed}/>
+        <input 
+          type="text" 
+          value={this.props.name} 
+          onChange={this.props.changed}
+        />
         </div>
     </Aux>
    )
   } 
 };
 
-
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
+};
 
 export default withClass(Person, classes.Person);
