@@ -5,7 +5,8 @@ import styled, { ThemeConsumer } from 'styled-components';
 import Person from '../components/Persons/Person/Person';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import withClass from '../hoc/withClass';
+import Aux from '../hoc/Aux';
 
 class App extends React.Component {
   constructor(props){
@@ -88,7 +89,7 @@ togglePersonsHandler = () => {
     }
 
     return (
-        <WithClass classes={classes.App}>
+        <Aux>
           <button onClick={() => {this.setState({showCockpit: false})
           }}
 
@@ -102,11 +103,11 @@ togglePersonsHandler = () => {
             : null}
           
             {persons}
-        </WithClass>  
+        </Aux>  
     );
   }
 }
 
 
-export default App;
+export default withClass(App, classes.App);
 
